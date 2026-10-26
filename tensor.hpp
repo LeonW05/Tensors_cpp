@@ -1,5 +1,6 @@
 #pragma once
 #include <cstddef>
+#include <ostream>
 #include <vector>
 
 class Tensor {
@@ -12,6 +13,10 @@ class Tensor {
         Tensor(std::vector<float> data);
         Tensor(std::vector<std::vector<float>> data);
 
+        const std::vector<float> &data() const;
+        const std::vector<std::size_t> &shape() const;
+        const std::vector<std::size_t> &stride() const;
+
         const float &item() const;
         float &item();
 
@@ -20,4 +25,6 @@ class Tensor {
 
         const float &operator()(std::size_t i, std::size_t j) const;
         float &operator()(std::size_t i, std::size_t j);
+
+        friend std::ostream &operator<<(std::ostream &os, const Tensor& obj);
 };
